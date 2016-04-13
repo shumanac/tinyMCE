@@ -2,17 +2,17 @@ var myAppModule = angular.module('myApp', ['ui.tinymce']);
 
 myAppModule.controller('TinyMceController', function($scope) {
   $scope.tinymceModel = '';
-
+  $scope.customerList = [];
   $scope.getContent = function() {
     console.log('Editor content:', $scope.tinymceModel);
   };
 
   $scope.setContent = function() {
-    $scope.tinymceModel = 'Time: ' + (new Date());
+    // $scope.tinymceModel = 'Time: ' + (new Date());
+    console.log($scope.customerList)
   };
-  $scope.customerList = ['Customer 1','Customer 2'];
+  
 
-console.log($scope.customerList.length)
   $scope.tinymceOptions = {
     
       formats: {
@@ -40,13 +40,14 @@ console.log($scope.customerList.length)
                           {
                             type: 'checkbox',
                             text: "Customer 1",
-                            onclick: function() {
-                             
+                            value: 'Customer 1',
+                            onclick: function(value) {
+                                $scope.customerList.push('Customer 1');
                                 editor.insertContent('Customer 1');
                             },
 
                             onselect: function(e) {
-                              console.log("hello")
+                              alert(e)
 
                               editor.insertContent('Customer 1');
                             }
@@ -55,7 +56,7 @@ console.log($scope.customerList.length)
                             type: 'checkbox',
                             text: "Customer 2",
                             onclick: function() {
-                             
+                                $scope.customerList.push('Customer 2');
                                 editor.insertContent('Customer 2');
                             },
                             onselect: function(e) {
