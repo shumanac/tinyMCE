@@ -1,7 +1,7 @@
 var myAppModule = angular.module('myApp', ['ui.tinymce']);
 
 myAppModule.controller('TinyMceController', function($scope) {
-  $scope.tinymceModel = 'Initial content';
+  $scope.tinymceModel = '';
 
   $scope.getContent = function() {
     console.log('Editor content:', $scope.tinymceModel);
@@ -25,29 +25,39 @@ console.log($scope.customerList.length)
 
       toolbar: "undo redo | bold italic | alignleft aligncenter alignright | code | customDrpdwn",
         setup : function ( editor ) {
+          
              editor.addButton( 'customDrpdwn', {
                 text : 'Customers List',
                 type: 'menubutton',
                 icon : false,
                 menu:[{
-                      text:"Select Customer:" , 
+                      text:"Select Customer" , 
                       onclick: function() {editor.windowManager.open({
-                        title: 'Category',
+                        title: 'Customers',
                         width : 270,
                         height : 70,
                         body: [
                           {
                             type: 'checkbox',
                             text: "Customer 1",
-                            
+                            onclick: function() {
+                             
+                                editor.insertContent('Customer 1');
+                            },
+
                             onselect: function(e) {
-    
+                              console.log("hello")
+
+                              editor.insertContent('Customer 1');
                             }
                           },
                           {
                             type: 'checkbox',
                             text: "Customer 2",
-                            
+                            onclick: function() {
+                             
+                                editor.insertContent('Customer 2');
+                            },
                             onselect: function(e) {
     
                             }
